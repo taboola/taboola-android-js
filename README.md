@@ -55,9 +55,11 @@ in your `Activity` or `Fragment` code:
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // webView must be registered before page is (re)loaded
         TaboolaJs.getInstance().registerWebView(mWebView);
         
-        // setting listener is optional
+        // setting the listener is optional
         TaboolaJs.getInstance().setOnRenderListener(mWebView,  new OnRenderListener() {
                 @Override
                 public void onRenderSuccessful(WebView webView, String placementName) {
@@ -69,6 +71,9 @@ in your `Activity` or `Fragment` code:
                         // todo
                 }
         });
+        
+        // todo load webiew content
+        // Note: if you are loading using webView.loadDataWithBaseURL(), baseUrl must be set.
     }
     
     @Override
