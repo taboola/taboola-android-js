@@ -13,7 +13,7 @@ Initializes TaboolaJs. Must be called before any other method of the JS SDK. Typ
 
 ### `public void registerWebView(WebView webView)`
 
-Registers `WebView` within Taboola JS SDK. `android.webkit.JavascriptInterface` with the name declared as `TaboolaJs.INJECTED_OBJECT_NAME` will be injected into given `WebView`
+Registers `WebView` within Taboola JS SDK. WebView must be registered before the page is (re)loaded. `android.webkit.JavascriptInterface` with the name declared as `TaboolaJs.INJECTED_OBJECT_NAME` will be injected into given `WebView`
 
 Note: When `WebView` is no longer needed it must be unregistered to avoid leaks
 
@@ -22,7 +22,7 @@ Note: When `WebView` is no longer needed it must be unregistered to avoid leaks
 
 ### `public void registerWebView(WebView webView, OnRenderListener onRenderListener)`
 
-Registers `WebView` within Taboola JS SDK. `android.webkit.JavascriptInterface` with the name declared as `TaboolaJs.INJECTED_OBJECT_NAME` will be injected into given `WebView`
+Registers `WebView` within Taboola JS SDK. WebView must be registered before the page is (re)loaded.`android.webkit.JavascriptInterface` with the name declared as `TaboolaJs.INJECTED_OBJECT_NAME` will be injected into given `WebView`
 
 Note: When `WebView` is no longer needed it must be unregistered to avoid leaks
 
