@@ -20,13 +20,13 @@
 1. Add the library dependency to your project
   
   ```groovy
-   compile 'com.taboola:android-sdk:1.+@aar'
+   compile 'com.taboola:android-sdk:1.2.1'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
    compile 'com.android.support:customtabs:25.+'
  ```
 > ## Notice
-> the + notation in gradle sdk version number is only a suggestion. We encourgae developers to use the latest SDK version. Taboola SDK will remain backward compatible between minor versions.
+> We encourgae developers to use the latest SDK version. In order to stay up-to-date we suggest subscribing to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
 
 
 2. Include this line in your app’s AndroidManifest.xml to allow Internet access
