@@ -11,11 +11,11 @@ import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import com.taboola.android.api.TaboolaOnClickListener;
 import com.taboola.android.js.TaboolaJs;
 import com.taboola.android.utils.Logger;
 
 import static com.taboola.samples.js.Const.BASE_URL;
-import static com.taboola.samples.js.Const.CONTENT_HTML;
 
 public class Screen2Fragment extends Fragment {
     private static final String TAG = Screen2Fragment.class.getSimpleName();
@@ -39,9 +39,18 @@ public class Screen2Fragment extends Fragment {
 
         TaboolaJs.getInstance()
                 .setLogLevel(Logger.DEBUG)
-                .registerWebView(mWebView);
+                .registerWebView(mWebView)
+                .setOnClickListener(new TaboolaOnClickListener() {
+                    @Override
+                    public boolean onItemClick(String placementName, String itemId, String clickUrl,
+                                               boolean isOrganic) {
+                        // todo handle organic items
+                        return false;
+                    }
+                });
 
-        mWebView.loadDataWithBaseURL(BASE_URL, CONTENT_HTML, "text/html; charset=utf-8", "UTF-8", "");
+        String contentHtml = FileUtil.getAssetFileContent(getContext(), Const.CONTENT_HTML_FILE_NAME);
+        mWebView.loadDataWithBaseURL(BASE_URL, contentHtml, "text/html", "UTF-8", "");
 
         return mRootView;
     }
