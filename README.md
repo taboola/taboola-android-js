@@ -20,7 +20,7 @@
 1. Add the library dependency to your project
   
   ```groovy
-   compile 'com.taboola:android-sdk:1.2.1'
+   compile 'com.taboola:android-sdk:1.3.0'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
    compile 'com.android.support:customtabs:25.+'
