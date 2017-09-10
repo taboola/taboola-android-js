@@ -58,7 +58,7 @@ In your `Application` class
 
 Before loading the actual content in your webview, you should register any webview that's intented to show Taboola widgets.
 
-Webview's should be registered before their content is actually loaded. If you register after loading, a refresh of the webview is required.
+Webviews should be registered before their content is actually loaded. If you register after loading, a refresh of the webview is required.
 
 Make sure to unregister your webview before it's destroyed.
 
