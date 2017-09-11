@@ -147,7 +147,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 </script>
 ```
 
-**'pass-app-page-id-here'**: pass the internal app representation of the page (needed if you're widget is showing organic content. otherwise, you can use 'auto'.
+**'pass-app-page-id-here'**: pass the internal app representation of the page (needed if you're widget is showing organic content. otherwise, you can use 'auto').
 
 **'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data
 
