@@ -38,7 +38,7 @@ Unregisters WebView within Taboola JS SDK. Also, if Android version is HONEYCOMB
  * **Parameters:** `webView` — WebView to unregister
  * **See also:** TaboolaJs.registerWebView(WebView)
 
-### public TaboolaJs setLogLevel(int logLevel)
+### `public TaboolaJs setLogLevel(int logLevel)`
 
 Sets log level for the SDK. You can find logLevel constants in the `com.taboola.android.utils.Logger` class, for example `Logger.DEBUG`
 
