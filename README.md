@@ -135,7 +135,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 ```javascript
 <script type="text/javascript">
      window._taboola = window._taboola || [];
-     _taboola.push({page-type:'pass-app-page-id-here', url:'pass-url-here'});
+     _taboola.push({page-type:'page-type-values-recieved-from-your-Taboola-account-managaer', url:'pass-url-here'});
      !function (e, f, u, i) {
           if (!document.getElementById(i)){
                e.async = 1;
@@ -147,7 +147,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 </script>
 ```
 
-**'pass-app-page-id-here'**: pass the internal app representation of the page (needed if you're widget is showing organic content. otherwise, you can use 'auto').
+**'page-type-values-received-from-your-Taboola-account-manager'**: pass the internal app representation of the page as received from Taboola account manager (needed if you're widget is showing organic content. otherwise, you can use 'auto').
 
 **'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data
 
