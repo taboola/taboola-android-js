@@ -100,7 +100,7 @@ in your `Activity` or `Fragment` code:
 
 The default click behavior of TaboolaWidget is as follows:
 
-* On devices where Chrome custom tab is supported - open the recommendation in a chrome custom tab (in-app)
+* On devices where Chrome custom tab is supported - open the recommendation in a Chrome custom tab (in-app)
 * Otherwise - open the recommendation in the system default web browser (outside of the app) 
 
 `TaboolaJs` allows app developers to intercept recommendation clicks in order to create a click-through or to override the default way of opening the recommended article. 
@@ -182,11 +182,11 @@ _taboola["mobile"].push({
 Do not forget to register your webview with the native `TaboolaJs`object!
 
 ## 2. Migrating from Taboola plain JS integration
-If you are app already has a webview which contains the Taboola web JS code in it, you can easily migrate with `TaboolaJS` with a few simple steps:
+If your app already has a webview which contains the Taboola web JS code in it, you can easily migrate with `TaboolaJS` with a few simple steps:
 
 ### 2.1 Javascript changes
 * In your page `<head>` section, change the path of taboola `loader.js` to be `mobile-loader.js`
-* Add this to your script right before push the configuration to `_taboola` (replace **'publisher-id-goes-here'** with your actual publisher id)
+* Add this to your script right before pushing the configuration to `_taboola` (replace **'publisher-id-goes-here'** with your actual publisher id)
 
 ```javascript
 _taboola["mobile"] = window._taboola["mobile"] || [];
