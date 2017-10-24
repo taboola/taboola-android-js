@@ -147,9 +147,9 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 </script>
 ```
 
-**'page-type-values-received-from-your-Taboola-account-manager'**: pass the internal app representation of the page as received from Taboola account manager (needed if you're widget is showing organic content. otherwise, you can use 'auto').
+**'page-type-values-received-from-your-Taboola-account-manager'**: pass the internal app representation of the page as received from Taboola account manager.
 
-**'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data
+**'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data.
 
 **'publisher-id'**: replace it with the publisher ID recieved from your Taboola account managaer.
  
