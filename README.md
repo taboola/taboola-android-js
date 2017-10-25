@@ -123,7 +123,7 @@ This method will be called every time a user clicks a recommendation, right befo
 * Return **`true`** - this will allow the app to implement a click-through and continue to the default behaviour.
 
 `isOrganic` indicates whether the item clicked was an organic content recommendation or not.
-**Best practice would be to suppress the default behavior for organic items, and instead open the relevant screen in your app which shows that piece of content.**
+**Best practice would be to suppress the default behavior for organic items, and instead open the relevant screen in your app which shows that content.**
 
 ### 1.6. Adding HTML/JS widget within the webview
 Your HTML page loaded inside the webview should contain the Taboola mobile JS code in order to bind with the TaboolaJs native SDK and actually show the widget. 
