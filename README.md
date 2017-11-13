@@ -28,10 +28,10 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
 1. Add the library dependency to your project
   
   ```groovy
-   compile 'com.taboola:android-sdk:1.3.1'
+   compile 'com.taboola:android-sdk:1.3.+@aar'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
-   compile 'com.android.support:customtabs:25.+'
+   compile 'com.android.support:customtabs:26.+'
  ```
 > ## Notice
 > We encourgae developers to use the latest SDK version. In order to stay up-to-date we suggest subscribing to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
