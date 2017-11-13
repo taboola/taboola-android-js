@@ -6,9 +6,10 @@
 ## Table Of Contents
 1. [Getting Started](#1-getting-started)
 2. [Migrating from Taboola plain JS integration](#2-migrating-from-taboola-plain-js-integration)
-3. [Example Apps](#2-example-apps)
-4. [SDK Reference](#3-sdk-reference)
-5. [License](#4-license)
+3. [Example App](#3-example-app)
+4. [SDK Reference](#4-sdk-reference)
+5. [Proguard](#5-proguard)
+6. [License](#6-license)
 
 ## 1. Getting Started
 
@@ -205,6 +206,10 @@ This repository includes an example Android app which uses the `TaboolaJs`. Revi
 ## 4. SDK Reference
 [TaboolaJs Reference](/TaboolaJsReference.md)
 
-## 5. License
+## 5. ProGuard
+You can find proguard rules for Taboola Widget in [proguard-taboola-js.pro](/Examples/JsSampleTaboola/app/proguard-taboola-js.pro) file.
+The file contains instructions on which rules to comment/uncomment depending on which parts of the SDK you are using.
+
+## 6. License
 This program is licensed under the Taboola, Inc. SDK License Agreement (the “License Agreement”).  By copying, using or redistributing this program, you agree to the terms of the License Agreement.  The full text of the license agreement can be found at [https://github.com/taboola/taboola-android/blob/master/LICENSE](https://github.com/taboola/taboola-android/blob/master/LICENSE).
 Copyright 2017 Taboola, Inc.  All rights reserved.
