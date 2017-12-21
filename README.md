@@ -136,7 +136,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 ```javascript
 <script type="text/javascript">
      window._taboola = window._taboola || [];
-     _taboola.push({page-type:'page-type-values-recieved-from-your-Taboola-account-managaer', url:'pass-url-here'});
+     _taboola.push({page-type:page-type-values-received-from-your-Taboola-account-manager:'auto', url:'pass-url-here'});
      !function (e, f, u, i) {
           if (!document.getElementById(i)){
                e.async = 1;
@@ -152,7 +152,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 
 **'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data.
 
-**'publisher-id'**: replace it with the publisher ID recieved from your Taboola account managaer.
+**'publisher-id'**: replace it with the publisher ID received from your Taboola account manager.
  
 Place this code where you want the widget to appear:
 
@@ -178,7 +178,7 @@ _taboola["mobile"].push({
 
 **'Placement Name'**: use the placement name received from your Taboola account manager
 
-**"publisher-id-goes-here"**: replace it with the publisher ID recieved from your Taboola account managaer.
+**"publisher-id-goes-here"**: replace it with the publisher ID received from your Taboola account manager.
 
 Do not forget to register your webview with the native `TaboolaJs`object!
 
