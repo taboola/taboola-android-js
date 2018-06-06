@@ -23,21 +23,23 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
 
 * Android version 2.1  (```android:minSdkVersion="9"```)
 
-### 1.2. Incorporating the SDK
 
+### 1.2. Incorporating the SDK
+1. Add `jcenter()` as a repository in your `build.gradle` file. Alternatively, download the altest aar from [here](https://bintray.com/taboola-com/taboola-android-sdk/android-sdk/2.0.8).
 1. Add the library dependency to your project
   
   ```groovy
-   compile 'com.taboola:android-sdk:1.3.+@aar'
+   compile 'com.taboola:android-sdk:2.0.+@aar'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
-   compile 'com.android.support:customtabs:26.+'
+   compile 'com.android.support:customtabs:27.+'
  ```
 > ## Notice
 > We encourgae developers to use the latest SDK version. In order to stay up-to-date we suggest subscribing to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
+> The Taboola SDK is shared with the [native taboola sdk](https://github.com/taboola/taboola-android) the only thing special about this example is that it shows how to use a subset of classes specific to webviews
 
 
-2. Include this line in your app’s AndroidManifest.xml to allow Internet access
+1. Include this line in your app’s AndroidManifest.xml to allow Internet access
  ```
    <uses-permission android:name="android.permission.INTERNET" />
  ```
