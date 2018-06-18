@@ -35,7 +35,7 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
    compile 'com.android.support:customtabs:26.+'
  ```
 > ## Notice
-> We encourgae developers to use the latest SDK version. In order to stay up-to-date we suggest subscribing to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
+> We encourage developers to use the latest SDK version. In order to stay up-to-date we suggest to subscribe in order to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
 
 
 2. Include this line in your app’s AndroidManifest.xml to allow Internet access
@@ -119,7 +119,7 @@ In order to intercept clicks, you should implement the interface `TaboolaOnClick
 
 ```
 
-This method will be called every time a user clicks a recommendation, right before triggering the default behavior. You can block default click handling for organic items by returning `false` in `onItemClick()` method.
+This method will be called every time a user clicks on a recommendation, right before triggering the default behavior. You can block default click handling for organic items by returning `false` in `onItemClick()` method.
 
 * Return **`false`** - abort the default behavior, the app should display the recommendation content on its own (for example, using an in-app browser). **(Aborts only for organic items!)**
 * Return **`true`** - this will allow the app to implement a click-through and continue to the default behaviour.
@@ -209,7 +209,7 @@ This repository includes an example Android app which uses the `TaboolaJs`. Revi
 
 ## 5. ProGuard
 You can find proguard rules for Taboola Widget in [proguard-taboola-js.pro](/Examples/JsSampleTaboola/app/proguard-taboola-js.pro) file.
-The file contains instructions on which rules to comment/uncomment depending on which parts of the SDK you are using.
+The file contains instructions to the rules which you should use depending on which parts of the SDK you are using (you should comment/uncomment which you need).
 
 ## 6. GDPR
 In order to support the The EU General Data Protection Regulation (GDPR - https://www.eugdpr.org/) in Taboola Mobile SDK, application developer should show a pop up asking the user’s permission for storing their personal data in the App. In order to control the user’s personal data (to store in the App or not) there exists a flag `User_opt_out`. It’s mandatory to set this flag when using the Taboola SDK. The way to set this flag depends on the type of SDK you are using. By default we assume no permission from the user on a pop up, so the personal data will not be saved.
@@ -224,5 +224,5 @@ _taboola.push(user_opt_out, ‘true’);
 ```
 
 ## 7. License
-This program is licensed under the Taboola, Inc. SDK License Agreement (the “License Agreement”).  By copying, using or redistributing this program, you agree to the terms of the License Agreement.  The full text of the license agreement can be found at [https://github.com/taboola/taboola-android/blob/master/LICENSE](https://github.com/taboola/taboola-android/blob/master/LICENSE).
+This program is licensed under the Taboola, Inc. SDK License Agreement (the “License Agreement”).  By copying, using or redistributing this program, you agree with the terms of the License Agreement.  The full text of the license agreement can be found at [https://github.com/taboola/taboola-android/blob/master/LICENSE](https://github.com/taboola/taboola-android/blob/master/LICENSE).
 Copyright 2017 Taboola, Inc.  All rights reserved.
