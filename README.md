@@ -219,7 +219,7 @@ Below you can find the way how to set the flag on SDK JS we support. It’s reco
 In the HTML file that contain the JS with publisher details, you will need to add:
 
 ```javascript
-_taboola.push(user_opt_out, ‘true’);
+_taboola.push({user_opt_out: 'true'});
 ```
 
 ## 7. License
