@@ -28,11 +28,14 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
 1. Add the library dependency to your project
 
   ```groovy
-   compile 'com.taboola:android-sdk:2.0.27@aar'
+   implementation 'com.taboola:android-sdk:2.0.27'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
-   compile 'com.android.support:customtabs:27.+'
+   implementation 'com.android.support:customtabs:27.+'
  ```
+ #### Note: It is advised to use the same version for `Custom Tabs` and your projects `compileSdkVersion`. For example:
+For `compileSdkVersion` **27** use 'com.android.support:customtabs:**27**.+'
+
 > ## Notice
 > We encourage developers to use the latest SDK version. In order to stay up-to-date we suggest to subscribe in order to get github notifications whenever there is a new release. For more information check: [https://help.github.com/articles/managing-notifications-for-pushes-to-a-repository/]()
 
@@ -44,7 +47,7 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
 
 ### 1.3. Init TaboolaJs
 
-In your `Application` class
+In your `Application` class:
 
 ```java
    public class MyApplication extends Application {
@@ -55,84 +58,133 @@ In your `Application` class
        }
    }
 ```
-### 1.4. Register/Unregister WebViews
 
-Before loading the actual content in your webview, you should register any webview that's intented to show Taboola widgets.
+If your project does not have an Application extending class, create one and then init TaboolaJs.
 
-Webviews should be registered before their content is actually loaded. If you register after loading, a refresh of the webview is required.
+### 1.4. Register and Unregister WebViews
+TaboolaJs is a component that works using **your** own Webview instance.
 
-Make sure to unregister your webview before it's destroyed.
+Taboola recommends this order to work with TaboolaJs & your Webview is as follows:
+1. Register your Webview with TaboolaJs.
+2. Load Taboola Content to your Webview.
+3. Unregister your Webview from TaboolaJs before exiting app.
+#### Note: Webviews should be registered **before** their content is actually loaded. If you register after loading, a refresh of the webview is required.
 
-in your `Activity` or `Fragment` code:
-
+#### 1.4.1. Registering 
+In your `Activity` or `Fragment` code:
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ...
+        
+        // The WebView must be registered before page is (re)loaded
+        TaboolaJs.getInstance().registerWebView(<YOUR_WEBVIEW>);
 
-        // webView must be registered before page is (re)loaded
-        TaboolaJs.getInstance().registerWebView(mWebView);
-
-        // setting the listener is optional
-        TaboolaJs.getInstance().setOnRenderListener(mWebView,  new OnRenderListener() {
-                @Override
-                public void onRenderSuccessful(WebView webView, String placementName) {
-                        // todo
-                }
-
-                @Override
-                public void onRenderFailed(WebView webView, String placementName, String errorMessage) {
-                        // todo
-                }
-        });
-
-        // TODO: load webiew content
-        // Note: if you are loading using webView.loadDataWithBaseURL(), baseUrl must be set.
+        // TODO: Load Webview content.
+        
+        // Note: if you are loading using <YOUR_WEBVIEW>.loadDataWithBaseURL(), baseUrl must be set.
     }
+```
 
+#### 1.4.2 Unregistering
+In your `Activity` or `Fragment` code:
+```java
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TaboolaJs.getInstance().unregisterWebView(mWebView);
+        TaboolaJs.getInstance().unregisterWebView(<YOUR_WEBVIEW>);
     }
 ```
 
-### 1.5. Intercepting recommendation clicks
 
-The default click behavior of TaboolaWidget is as follows:
+### 1.5 Receiving Webview Render Status
+If you wish to receive an event about the render status, register the following listener in TaboolaJs.
 
-* On devices where Chrome custom tab is supported - open the recommendation in a Chrome custom tab (in-app)
-* Otherwise - open the recommendation in the system default web browser (outside of the app)
-
-`TaboolaJs` allows app developers to intercept recommendation clicks in order to create a click-through or to override the default way of opening the recommended article.
-
-In order to intercept clicks, you should implement the interface `TaboolaOnClickListener` and set it in the `TaboolaJs` object.
-
+#### 1.5.1 Create an OnRenderListener
 ```java
-   TaboolaJs.getInstance().setOnClickListener(new TaboolaOnClickListener() {
-       @Override
-       public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic) {
-           return false;
-       }
-   });
+    OnRenderListener onRenderListener = new  OnRenderListener() {
+        @Override
+        public void onRenderSuccessful(WebView webView, String placementName, int height) {
+                //Code...
+        }
 
+        @Override
+        public void onRenderFailed(WebView webView, String placementName, String errorMessage) {
+                //Code...
+        }
+    });
+```
+#### 1.5.2 Register the above listener with TaboolaJs
+```java
+    TaboolaJs.getInstance().setOnRenderListener(<YOUR_WEBVIEW>,  onRenderListener);
 ```
 
-This method will be called every time a user clicks on a recommendation, right before triggering the default behavior. You can block default click handling for organic items by returning `false` in `onItemClick()` method.
 
-* Return **`false`** - abort the default behavior, the app should display the recommendation content on its own (for example, using an in-app browser). **(Aborts only for organic items!)**
-* Return **`true`** - this will allow the app to implement a click-through and continue to the default behaviour.
+### 1.6. Intercepting recommendation clicks
 
-`isOrganic` indicates whether the item clicked was an organic content recommendation or not.
-**Best practice would be to suppress the default behavior for organic items, and instead open the relevant screen in your app which shows that content.**
+##### 1.6.1. The default click behaviour of TaboolaWidget is as follows:
+* On devices where `Chrome Custom Tabs` are supported - Taboola will open the recommendation in a Chrome Custom Tab (in-app)
+* Otherwise - Taboola will open the recommendation in the default system web browser (outside of the app)
 
-### 1.6. Adding HTML/JS widget within the webview
-Your HTML page loaded inside the webview should contain the Taboola mobile JS code in order to bind with the TaboolaJs native SDK and actually show the widget.
+##### 1.6.2. Overriding default behaviour:
+TaboolaApi allows app developers to intercept recommendation clicks in order to create a click-through or to override the default way of opening the recommended article.
+
+In order to intercept clicks, you should implement the interface `com.taboola.android.api.TaboolaOnClickListener` and set it in the sdk.
+
+1. Implement the interface `com.taboola.android.api.TaboolaOnClickListener` 
+    1.1 `TaboolaOnClickListener` include the methods:
+     ```java
+    public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic);
+     ```
+    1.2 Example implementation:
+    In the same Activity/Fragment as `TaboolaWidget` instance:
+     ```java
+    TaboolaOnClickListener taboolaOnClickListener = new TaboolaOnClickListener() {
+      @Override
+      public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic) {          
+          //Code...
+          return false;
+      }};
+     ```    
+2. Connect the event listener to your `TaboolaWidget` instance. 
+    ```java
+    TaboolaApi.getInstance().setOnClickListener(taboolaOnClickListener);
+    ```    
+    
+##### 1.6.3. Event: onItemClick
+`boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic)`
+This method will be called every time a user clicks on a Taboola Recommendation, right before it is sent to Android OS for relevant action resolve. The return value of this method allows you to control further system behaviour (after your own code executes).
+
+###### 1.6.3.1 `placementName:`
+The name of the placement, in which an Item was clicked.
+
+###### 1.6.3.2 `itemtId:`
+The id of the Item clicked.
+
+###### 1.6.3.3 `clickUrl:`
+Original click url.
+
+###### 1.6.3.4 `isOrganic:` 
+Indicates whether the item clicked was an organic content Taboola Recommendation or not.
+(The **best practice** would be to suppress the default behavior for organic items, and instead open the relevant screen in your app which will show that piece of content).
+
+###### 1.6.3.5 `Return value:`
+* Returning **`false`** - Aborts the click's default behavior. The app should display the Taboola Recommendation content on its own (for example, using an in-app browser).
+* Returning **`true`** - The click will be handled by Taboola's default behavior.
+**Note:** Sponsored item clicks (non-organic) are not overridable!
+    
+
+### 1.7. Adding HTML/JS widget within the WebView
+In order to show Taboola Widget in your WebView instance, load the Taboola mobile JS code in your HTML page, as shown here.
 
 If you are already familiar with the Taboola web JS code, notice that although the Taboola mobile JS code is mostly identical to the Taboola web JS code, there are a few minor modifications that should be made.
 
+Taboola requires multiple javascript snippets to be inserted in your page:
+#### 1.7.1. HTML Head Component
 Place this code in the `<head>` tag of any HTML page on which you’d like the Taboola widget to appear:
 
+##### 1.7.1.1. Code
 ```javascript
 <script type="text/javascript">
      window._taboola = window._taboola || [];
@@ -147,15 +199,17 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
      }(document.createElement('script'),document.getElementsByTagName('script')[0],'//cdn.taboola.com/libtrc/publisher-id/mobile-loader.js','tb_mobile_loader_script');
 </script>
 ```
-
+##### 1.7.1.2 Parameters Explained
 **'page-type-values-received-from-your-Taboola-account-manager'**: pass the internal app representation of the page as received from Taboola account manager.
 
 **'pass-url-here'**: pass the canonical url (web representation) of the app page - this is needed for us to crawl the page to get contextual and meta data.
 
 **'publisher-id'**: replace it with the publisher ID received from your Taboola account manager.
 
+#### 1.7.2 HTML Body
 Place this code where you want the widget to appear:
 
+##### 1.7.2.1. Code
 ```html
 <div id="container-id"></div>
 <script type="text/javascript">
@@ -172,6 +226,7 @@ _taboola["mobile"].push({
 });
 </script>
 ```
+##### 1.7.2.2. Parameters Explained
 **'container-id'**: use any id for the actual widget container element
 
 **'mode-name'**: replace it with the mode parameter received from your Taboola account manager
@@ -197,11 +252,25 @@ _taboola["mobile"].push({
 ```
 
 ### 2.1 Native code changes
-follow the instructions on steps 1.1 to 1.5 to configure `TaboolaJs` native side within your app.
+Follow the instructions on steps 1.1 to 1.5 to configure `TaboolaJs` native side within your app.
 
 
 ## 3. Example App
-This repository includes an example Android app which uses the `TaboolaJs`. Review it and see how `TaboolaJs` is integrated in practice.
+This repository includes an example Android app which uses the `TaboolaJs`. Feel free to review it and see how `TaboolaJs` is integrated in practice.
+
+To use it:
+##### 3.1 Clone this repository
+1. Look for the "Clone or Download" button on this page top.
+2. Copy the url from the drop box.
+3. Clone to your local machine using your favourite Git client.
+
+##### 3.2 Open the project wih your IDE.
+1. Open the project as you would any other Android project.
+2. Taboola is optimized to working with Android Studio but other IDEs should work as well.
+
+##### 3.3 Example App As Troubleshooting Helper:
+In case you encounter some issues while integrating the SDK into your app, try to recreate the scenario within the example app. This might help to isolate the problems. For more help, you would be able to send the example app with your recreated issue to Taboola's support.
+
 
 ## 4. SDK Reference
 [TaboolaJs Reference](/TaboolaJsReference.md)
