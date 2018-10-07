@@ -28,7 +28,7 @@ If you are implementing a new Taboola integration in your app, `TaboolaJs` shoul
 1. Add the library dependency to your project
 
   ```groovy
-   implementation 'com.taboola:android-sdk:2.0.27@aar'
+   implementation 'com.taboola:android-sdk:2.0.27'
 
    // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
    implementation 'com.android.support:customtabs:27.+'
@@ -171,8 +171,8 @@ Indicates whether the item clicked was an organic content Taboola Recommendation
 
 ###### 1.6.3.5 `Return value:`
 * Returning **`false`** - Aborts the click's default behavior. The app should display the Taboola Recommendation content on its own (for example, using an in-app browser).
-* Returning **`true`** - The click will be a standard one and will be sent to the Android OS for default behaviour.
-**Note:** Sponsored item clicks (non-organic) are not overridable!    
+* Returning **`true`** - The click will be handled by Taboola's default behavior.
+**Note:** Sponsored item clicks (non-organic) are not overridable!
     
 
 ### 1.7. Adding HTML/JS widget within the WebView
