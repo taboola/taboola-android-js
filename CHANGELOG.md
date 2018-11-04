@@ -2,6 +2,10 @@
 
 ## [2.0.25] - 2018-09-04
 ### Fixed
+- Minor bug fixes related to API/STD integrations only
+
+## [2.0.25] - 2018-09-04
+### Fixed
 - Prevent crash in case where not delivering WebView attached to window
 - Added logs for null context state
 - Added support for notify-clientEvent
