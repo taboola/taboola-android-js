@@ -1,6 +1,6 @@
 # Change Log
 
-## [2.0.25] - 2018-09-04
+## [2.0.28] - 2018-11-04
 ### Fixed
 - Minor bug fixes related to API/STD integrations only
 
