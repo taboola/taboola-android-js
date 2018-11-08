@@ -12,4 +12,6 @@
 # add if NOT using MoPub mediation
 -dontwarn com.taboola.android.mediation.MoPubCustomEventBanner
 
+# Always add
+-keepnames class com.taboola.android.integration_verifier.testing.tests.proguard.ProguardVerificationStub
 ###---------- End: proguard configuration for Taboola js  ----------
