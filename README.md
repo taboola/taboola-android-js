@@ -188,7 +188,7 @@ Place this code in the `<head>` tag of any HTML page on which you’d like the T
 ```javascript
 <script type="text/javascript">
      window._taboola = window._taboola || [];
-     _taboola.push({page-type:page-type-values-received-from-your-Taboola-account-manager:'auto', url:'pass-url-here'});
+     _taboola.push({page-type:'auto', url:'pass-url-here'});//Or other values received from your Taboola account manager.
      !function (e, f, u, i) {
           if (!document.getElementById(i)){
                e.async = 1;
